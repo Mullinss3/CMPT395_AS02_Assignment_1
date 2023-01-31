@@ -17,15 +17,25 @@ Notes:
 def fizzBuzz(input_number):
     '''
     Purpose:
-              Takes a given number and returns it as a string
+              Takes a given number and returns it as a string, 
+              if the number given is a multiple of 3, then
+              it returns the string "Fizz"
     
     Parameters:
               input_number - a number given to the function
     
     Returns:
-              input_number - a number converted to a string
+              input_number - a number converted to a string that
+              is not a multiple of three
+              "Fizz" - a string if input_number is a multiple
+              of 3
     '''    
-    return str(input_number)
+    if (input_number == 0):
+        return str(input_number)
+    elif (input_number % 3 == 0):
+        return "Fizz"
+    else:
+        return str(input_number)
 
 def test_fizzBuzz():
     '''
@@ -46,5 +56,21 @@ def test_fizzBuzz():
         print("Pass!")
     else:
         print("Fail!")
+    
+    # Testing if fizzBuzz returns the string Fizz when given a multiple of three
+    print("fizzBuzz returns the string Fizz when given a multiple of three test:")
+    str_return = fizzBuzz(3)
+    if (str_return == "Fizz"):
+        print("Pass!")
+    else:
+        print("Fail!")
+        
+    # Testing if fizzBuzz does not return the string Fizz when not given a multiple of three
+    print("fizzBuzz does not return the string Fizz when not given a multiple of three test:")
+    str_return = fizzBuzz(2)
+    if (str_return == "Fizz"):
+        print("Fail!")
+    else:
+        print("Pass!")    
 
 test_fizzBuzz()
