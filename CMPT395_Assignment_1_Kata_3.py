@@ -46,7 +46,7 @@ def password_Validator(password):
               any failure messages if it failed a check
     '''    
     # setting up variables
-    password_validation, password_error = True, None
+    password_validation, password_error, special_characters = True, None, ["!","@","#","$","%","^","&","*","(",")","-","_","=","+","<",",",">",".","?","/",":",";",'"',"'","{","[","}","]","\\","|","`","~"]
     # checking if the password is at least 8 characters long
     if (len(password) < 8):
         password_validation, password_error = False, "Password must be at least 8 characters"
@@ -73,7 +73,19 @@ def password_Validator(password):
             password_error = password_error + "\nPassword must contain at least one capital letter"
         # password has not errored yet
         else:
-            password_validation, password_error = False, "Password must contain at least one capital letter"    
+            password_validation, password_error = False, "Password must contain at least one capital letter"
+    # checking if the password has at least one special character
+    count = 0
+    for character in password:
+        if (character in special_characters):
+            count += 1
+    if (count < 1):
+        # password already had another validation error
+        if (password_validation == False):
+            password_error = password_error + "\nPassword must contain at least one special character"
+        # password has not errored yet
+        else:
+            password_validation, password_error = False, "Password must contain at least one special character"     
     return password_validation, password_error
 
 def test_password_validator():
@@ -89,9 +101,9 @@ def test_password_validator():
     '''     
     # TEST 1: Testing if password_validator recognizes the password validates in all requirements
     print("TEST 1: Testing if password_validator recognizes the password validates in all requirements:")
-    # password succeeds validation
-    password_validation, password_error = password_Validator("Strongpassword12")
-    print("'Strongpassword12' should validate True and report no error:")
+        # password succeeds validation
+    password_validation, password_error = password_Validator("Strongpassword12#")
+    print("'Strongpassword12#' should validate True and report no error:")
     if (password_validation == True and password_error == None):
         print("Pass!")
     else:
@@ -100,8 +112,8 @@ def test_password_validator():
     # TEST 2: Testing if password_validator recognizes the password does not have at least 8 characters
     print("TEST 2: Testing if password_validator recognizes the password does not have at least 8 characters:")    
         # password fails validation
-    print("'Hi12' should validate False and report it does not have at least 8 characters:")
-    password_validation, password_error = password_Validator("Hi12")
+    print("'Hi12#' should validate False and report it does not have at least 8 characters:")
+    password_validation, password_error = password_Validator("Hi12#")
     if (password_validation == False and password_error == "Password must be at least 8 characters"):
         print("Pass!")
     else:
@@ -110,8 +122,8 @@ def test_password_validator():
     # TEST 3: Testing if password_validator recognizes the password does not have at least 2 digits
     print("TEST 3: Testing if password_validator recognizes the password does not have at least 2 digits:")    
         # password fails validation
-    print("'Strongpassword' should validate False and report it does not have at least 2 numbers:")
-    password_validation, password_error = password_Validator("Strongpassword")
+    print("'Strongpassword#' should validate False and report it does not have at least 2 digits:")
+    password_validation, password_error = password_Validator("Strongpassword#")
     if (password_validation == False and password_error == "The password must contain at least 2 numbers"):
         print("Pass!")
     else:
@@ -120,19 +132,29 @@ def test_password_validator():
     # TEST 4: Testing if password_validator recognizes the password does not have at least 1 captial
     print("TEST 4: Testing if password_validator recognizes the password does not have at least 1 capital:")    
         # password fails validation
-    print("'strongpassword12' should validate False and report it does not have at least 1 capital:")
-    password_validation, password_error = password_Validator("strongpassword12")
+    print("'strongpassword12#' should validate False and report it does not have at least 1 capital:")
+    password_validation, password_error = password_Validator("strongpassword12#")
     if (password_validation == False and password_error == "Password must contain at least one capital letter"):
+        print("Pass!")
+    else:
+        print("Fail!")   
+        
+    # TEST 5: Testing if password_validator recognizes the password does not have at least 1 special character
+    print("TEST 5: Testing if password_validator recognizes the password does not have at least 1 special character:")    
+        # password fails validation
+    print("'Strongpassword12' should validate False and report it does not have at least 1 special character:")
+    password_validation, password_error = password_Validator("Strongpassword12")
+    if (password_validation == False and password_error == "Password must contain at least one special character"):
         print("Pass!")
     else:
         print("Fail!")    
     
-    # TEST 5: Testing if password_validator recognizes a failure in all password requirements
-    print("TEST 5: Testing if password_validator recognizes a failure in all password requirements:")    
+    # TEST 6: Testing if password_validator recognizes a failure in all password requirements
+    print("TEST 6: Testing if password_validator recognizes a failure in all password requirements:")    
         # password fails validation
-    print("'hi' should validate False and report it does not have at least 8 characters and 2 numbers:")
+    print("'hi' should validate False and report it does not have at least 8 characters, 2 numbers, one captial, and one special character:")
     password_validation, password_error = password_Validator("hi")
-    if (password_validation == False and password_error == "Password must be at least 8 characters\nThe password must contain at least 2 numbers\nPassword must contain at least one capital letter"):
+    if (password_validation == False and password_error == "Password must be at least 8 characters\nThe password must contain at least 2 numbers\nPassword must contain at least one capital letter\nPassword must contain at least one special character"):
         print("Pass!")
     else:
         print("Fail!")       
