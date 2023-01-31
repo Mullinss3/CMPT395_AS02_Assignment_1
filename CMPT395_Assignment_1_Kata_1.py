@@ -1,6 +1,6 @@
-# CMPT 395 Assignment 1
+# CMPT 395 AS02 Assignment 1
 # Kata 1
-# By Shea Mullins
+# By Shea Mullins 3107914
 '''
 OBJECTIVE
 1. Write a “fizzBuzz” method that accepts a number as input and returns it as a String.
@@ -21,7 +21,8 @@ def fizzBuzz(input_number):
               if the number given is a multiple of 3, then
               it returns the string "Fizz". If the number given
               is a multiple of 5, then it returns the string
-              "Buzz".
+              "Buzz". IF the number given is a multiple of both
+              3 and 5, then it returns the string "FizzBuzz".
     
     Parameters:
               input_number - a number given to the function
@@ -29,12 +30,17 @@ def fizzBuzz(input_number):
     Returns:
               returns the string "Fizz" if input_number was
               a multiple of 3, "Buzz" if input_number was a
-              multiple of 5, or just returns input_number as
-              a string if not a multiple of 5 or 3
+              multiple of 5, "FizzBuzz" if input_number is a
+              multiple of both 3 and 5, or just returns 
+              input_number as a string if not a multiple of 5
+              or 3.
     '''    
     # input_number was 0
     if (input_number == 0):
         return str(input_number)
+    # input_number was a multiple of 3 and 5
+    elif (input_number % 3 == 0 and input_number % 5 == 0):
+        return "FizzBuzz"
     # input_number was a multiple of 3
     elif (input_number % 3 == 0):
         return "Fizz"
@@ -85,6 +91,14 @@ def test_fizzBuzz():
     print("TEST 4: fizzBuzz returns the number 4 as the string '4' and not 'Fizz' or 'Buzz' test:")
     str_return = fizzBuzz(4)
     if (str_return == "4"):
+        print("Pass!")
+    else:
+        print("Fail!")    
+        
+    # TEST 5: Testing if fizzBuzz returns the string 'FizzBuzz' when given a multiple of 3 and 5
+    print("TEST 5: fizzBuzz returns the string 'FizzBuzz' when given a multiple of 3 and 5 test:")
+    str_return = fizzBuzz(30)
+    if (str_return == "FizzBuzz"):
         print("Pass!")
     else:
         print("Fail!")      
