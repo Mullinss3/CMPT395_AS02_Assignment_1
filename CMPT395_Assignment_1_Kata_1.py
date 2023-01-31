@@ -19,21 +19,29 @@ def fizzBuzz(input_number):
     Purpose:
               Takes a given number and returns it as a string, 
               if the number given is a multiple of 3, then
-              it returns the string "Fizz"
+              it returns the string "Fizz". If the number given
+              is a multiple of 5, then it returns the string
+              "Buzz".
     
     Parameters:
               input_number - a number given to the function
     
     Returns:
-              input_number - a number converted to a string that
-              is not a multiple of three
-              "Fizz" - a string if input_number is a multiple
-              of 3
+              returns the string "Fizz" if input_number was
+              a multiple of 3, "Buzz" if input_number was a
+              multiple of 5, or just returns input_number as
+              a string if not a multiple of 5 or 3
     '''    
+    # input_number was 0
     if (input_number == 0):
         return str(input_number)
+    # input_number was a multiple of 3
     elif (input_number % 3 == 0):
         return "Fizz"
+    # input_number was a multiple of 5
+    elif (input_number % 5 == 0):
+        return "Buzz"
+    # input_number was not a multiple of 3 or 5
     else:
         return str(input_number)
 
@@ -48,8 +56,8 @@ def test_fizzBuzz():
     Returns:
               None
     '''     
-    # Testing if fizzBuzz returns a string when a number is given
-    print("fizzBuzz returns a string and not a integer test:")
+    # TEST 1: Testing if fizzBuzz returns a string when a number is given
+    print("TEST 1: fizzBuzz returns a string and not a integer test:")
     str_return = fizzBuzz(0)
     is_str_return_a_str = isinstance(str_return, str)
     if (is_str_return_a_str):
@@ -57,20 +65,28 @@ def test_fizzBuzz():
     else:
         print("Fail!")
     
-    # Testing if fizzBuzz returns the string Fizz when given a multiple of three
-    print("fizzBuzz returns the string Fizz when given a multiple of three test:")
-    str_return = fizzBuzz(3)
+    # TEST 2: Testing if fizzBuzz returns the string 'Fizz' when given a multiple of 3
+    print("TEST 2: fizzBuzz returns the string 'Fizz' when given a multiple of 3 test:")
+    str_return = fizzBuzz(9)
     if (str_return == "Fizz"):
         print("Pass!")
     else:
         print("Fail!")
         
-    # Testing if fizzBuzz does not return the string Fizz when not given a multiple of three
-    print("fizzBuzz does not return the string Fizz when not given a multiple of three test:")
-    str_return = fizzBuzz(2)
-    if (str_return == "Fizz"):
-        print("Fail!")
+    # TEST 3: Testing if fizzBuzz returns the string 'Buzz' when given a multiple of 5
+    print("TEST 3: fizzBuzz returns the string 'Buzz' when given a multiple of 5 test:")
+    str_return = fizzBuzz(25)
+    if (str_return == "Buzz"):
+        print("Pass!")
     else:
-        print("Pass!")    
+        print("Fail!")    
+        
+    # TEST 4: Testing if fizzBuzz returns the number 4 as the string '4' and not 'Fizz' or 'Buzz'
+    print("TEST 4: fizzBuzz returns the number 4 as the string '4' and not 'Fizz' or 'Buzz' test:")
+    str_return = fizzBuzz(4)
+    if (str_return == "4"):
+        print("Pass!")
+    else:
+        print("Fail!")      
 
 test_fizzBuzz()
